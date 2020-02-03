@@ -1,0 +1,145 @@
+// See https://go.microsoft.com/fwlink/?LinkId=733558 
+// for the documentation about the tasks.json format
+{
+    "version": "2.0.0",
+    "tasks": [
+        /*------------------STATIC LIBS---------------------*/
+        /* > Compile Static Libs
+        /* > Build Static Libs
+        /* > Build Main file and link Static Libs
+        /*------------------STATIC LIBS---------------------*/
+        {
+            "type": "shell",
+            "label": "g++.exe : complile static libs",
+            "command": "D:\\Software\\mingw-w64\\x86_64-8.1.0-posix-sjlj-rt_v6-rev0\\mingw64\\bin\\g++.exe",
+            "args": [
+                "-c",
+                "${workspaceFolder}\\Lib\\Math.cpp",
+                "-o",
+                "${workspaceFolder}\\Lib\\Math.o"
+            ],
+            "options": {
+                "cwd": "D:\\Software\\mingw-w64\\x86_64-8.1.0-posix-sjlj-rt_v6-rev0\\mingw64\\bin"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "type": "shell",
+            "label": "ar.exe : build static libs",
+            "command": "D:\\Software\\mingw-w64\\x86_64-8.1.0-posix-sjlj-rt_v6-rev0\\mingw64\\bin\\ar.exe",
+            "args": [
+                "crf",
+                "${workspaceFolder}\\Lib\\Math.lib",
+                "${workspaceFolder}\\Lib\\Math.o"
+            ],
+            "options": {
+                "cwd": "D:\\Software\\mingw-w64\\x86_64-8.1.0-posix-sjlj-rt_v6-rev0\\mingw64\\bin"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "type": "shell",
+            "label": "g++.exe : build Main file and link static Libs",
+            "command": "D:\\Software\\mingw-w64\\x86_64-8.1.0-posix-sjlj-rt_v6-rev0\\mingw64\\bin\\g++.exe",
+            "args": [
+                "-o",
+                "${workspaceFolder}\\main.exe",
+                "${workspaceFolder}\\main.cpp",
+                "-L${workspaceFolder}\\Lib",
+                "-lMath"
+                /*...-lNewLib(.lib)*/
+            ],
+            "options": {
+                "cwd": "D:\\Software\\mingw-w64\\x86_64-8.1.0-posix-sjlj-rt_v6-rev0\\mingw64\\bin"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        /*------------------DYNAMIC LIBS---------------------*/
+        /* > Build Dynamic Libs
+        /* > Compile Main File
+        /* > Build Main file and link Dynamic Libs
+        /*------------------DYNAMIC LIBS---------------------*/
+        {
+            "type": "shell",
+            "label": "g++.exe : build dynamic libs",
+            "command": "D:\\Software\\mingw-w64\\x86_64-8.1.0-posix-sjlj-rt_v6-rev0\\mingw64\\bin\\g++.exe",
+            "args": [
+                "-shared",
+                "-o",
+                "${workspaceFolder}\\Math.dll",
+                "${workspaceFolder}\\Lib\\Math.cpp"
+            ],
+            "options": {
+                "cwd": "D:\\Software\\mingw-w64\\x86_64-8.1.0-posix-sjlj-rt_v6-rev0\\mingw64\\bin"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "type": "shell",
+            "label": "g++.exe : compile Main File",
+            "command": "D:\\Software\\mingw-w64\\x86_64-8.1.0-posix-sjlj-rt_v6-rev0\\mingw64\\bin\\g++.exe",
+            "args": [
+                "-c",
+                "${workspaceFolder}\\main.cpp",
+                "-o",
+                "${workspaceFolder}\\main.o"
+            ],
+            "options": {
+                "cwd": "D:\\Software\\mingw-w64\\x86_64-8.1.0-posix-sjlj-rt_v6-rev0\\mingw64\\bin"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "type": "shell",
+            "label": "g++.exe : build Main file and link dynamic Libs",
+            "command": "D:\\Software\\mingw-w64\\x86_64-8.1.0-posix-sjlj-rt_v6-rev0\\mingw64\\bin\\g++.exe",
+            "args": [
+                "-o",
+                "${workspaceFolder}\\main.exe",
+                "${workspaceFolder}\\main.cpp",
+                "${workspaceFolder}\\Math.dll"
+                /*...NewDllLib.dll*/
+            ],
+            "options": {
+                "cwd": "D:\\Software\\mingw-w64\\x86_64-8.1.0-posix-sjlj-rt_v6-rev0\\mingw64\\bin"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}
